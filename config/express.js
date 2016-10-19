@@ -58,7 +58,7 @@ module.exports = function (config) {
 
   configInjector(config, api, app);  
 
-  app.all(config.server.basePath + '/*', [validateRequest()]);
+  // app.all(config.server.basePath + '/*', [validateRequest()]); //TO ENABLE FOR AUTH
   app.use(config.server.basePath, api);
 
   app.get('/api-docs', function (req, res) {

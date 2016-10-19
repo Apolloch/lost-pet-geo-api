@@ -2,7 +2,7 @@ module.exports = {
   name: 'lostpet-api',
   server: {
     port: process.env.PORT || 5555,
-    url: 'http://api.com:' + (process.env.PORT || 5555),
+    url: 'http://lostpet-api.mybluemix.net',
     swaggerUrl: 'http://api.com',
     basePath: '/api/v1.0'
   },
