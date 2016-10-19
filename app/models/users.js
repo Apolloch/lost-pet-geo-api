@@ -24,6 +24,18 @@ var UserSchema = new Schema({
     lowercase: true,
     trim: true
   },
+  phone: {
+    type: String,
+    default: '',
+    trim: true
+  },
+  address: {
+    number: {type: String},
+    street: {type: String},
+    zip: {type: String},
+    city: {type: Number},
+    country: {type: String}
+  },
   role: {
     type: String,
     default: 'user'
@@ -32,7 +44,6 @@ var UserSchema = new Schema({
     type: Date,
     default: ''
   },
-  favorites: [Number],
   supplierId: {
     type: Number,
     default: 174
