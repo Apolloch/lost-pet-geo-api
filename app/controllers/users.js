@@ -11,7 +11,8 @@ module.exports = function(router, Users) {
   }
 
   function getOne(req, res) {
-    res.json(Users.findAsync({_id: req.params.id}));
+    return Users.findAsync({_id: req.params.id})
+      .spread((user) => res.json(user));
   }
 
   function getPets(req, res) {
