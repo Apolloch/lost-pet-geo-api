@@ -6,6 +6,7 @@ module.exports = function(router, Users) {
   router.get('/:id', getOne);
   router.get('/:id/pets', getPets);
 
+  router.put('/:id',updateUser);
   function getAll(req, res) {
     res.json(Users.findAsync());
   }
@@ -41,4 +42,29 @@ module.exports = function(router, Users) {
     ]);
   }
 
+  function updateUser(req,res) {
+    var id = req.params.id ;
+    Users.findOneAsync({id : id}).then(function (user) {
+      if (user != null) {
+        console.log(req.body.firstName);
+        Users.updateAsync({_id : user._id}, {
+          firstName: (req.body.firstName || user.firstName),
+          lastName: (req.body.lastName || user.lastName),
+          birthdate: (req.body.birthdate || user.birthdate),
+        })
+            .then(function (result) {
+                  console.log(result);
+                  return res.status(200).json(result);
+                },
+                function (err) {
+                  return res.status(500).json(err);
+                });
+      }
+      else{
+        return res.status(404).end();
+      }
+    },function (err) {
+      return res.status(404).end();
+    });
+  }
 };
