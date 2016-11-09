@@ -3,6 +3,8 @@
 module.exports = function(router, Users) {
 
   router.get('/', getAll);
+  router.get('/species', getSpecies);
+  router.get('/species/:specie/breeds', getBreeds);
   router.get('/:id', getOne);
 
   function getAll(req, res) {
@@ -29,6 +31,30 @@ module.exports = function(router, Users) {
       }
     ]);
   }
+
+
+  function getSpecies(req, res) {
+    return res.json([
+      'lapin',
+      'chien',
+      'chat',
+      'other'
+    ]);
+  }
+
+  function getBreeds(req, res) {
+    var specie = req.params.specie;
+    // Get all races http://wamiz.com/chiens/race-chien/races
+    return {
+      specie: 'chien',
+      breeds: [
+        'teckel',
+        'yorkshire',
+        'berger allemand'
+      ]
+    };
+  }
+
 
   function getOne(req, res) {
     // res.json(Users.findAsync({_id: req.params.id}));
