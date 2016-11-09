@@ -45,14 +45,14 @@ module.exports = function(router, Users) {
   function getBreeds(req, res) {
     var specie = req.params.specie;
     // Get all races http://wamiz.com/chiens/race-chien/races
-    return {
-      specie: 'chien',
+    return res.json({
+      specie: specie,
       breeds: [
         'teckel',
         'yorkshire',
         'berger allemand'
       ]
-    };
+    });
   }
 
 
