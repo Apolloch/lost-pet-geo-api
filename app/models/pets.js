@@ -3,6 +3,7 @@
  */
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
+mongoose.Promise = require('bluebird'); 
 
 var PetSchema = new Schema({
     id: {
