@@ -11,7 +11,6 @@ module.exports = function(Users, _, app) {
   function signup(req, res) {
 
     var error = fieldsValidator.isValidWithMongo(Users, req.body, false, ['hashed_password', 'salt']);
-
     if (error || !req.body.password) {
       return res.status(400).send(error || 'Password is required');
     }

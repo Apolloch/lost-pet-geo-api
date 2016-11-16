@@ -13,7 +13,7 @@ module.exports = function(router, Users) {
 
   function getOne(req, res) {
     return Users.findAsync({_id: req.params.id})
-      .spread((user) => res.json(user));
+      .spread(function (user) { return res.json(user); });
   }
 
   function getPets(req, res) {
