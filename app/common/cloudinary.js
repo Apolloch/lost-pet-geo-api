@@ -3,7 +3,9 @@
 var cloudinary = require('cloudinary');
 var Bluebird = require('bluebird');
 
-module.exports = function () {
+module.exports = function (config) {
+//  if (config)
+    cloudinary.config(config);
 
   function upload(bytes, content_type, name, eager) {
 

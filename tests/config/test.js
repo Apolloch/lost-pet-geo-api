@@ -7,5 +7,10 @@ module.exports = {
   },
   mongo: {
     url: 'mongodb://test:test@ds061371.mongolab.com:61371/node-base-test'
+  },
+  cloudinary: {
+    cloud_name: 'dv1oo16rf', 
+    api_key: '416523386765334', 
+    api_secret: '4xvoXrNJB65-f0rrB6pklMuk91Y' 
   }
 };
