@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/bnjjj/lost-pet-geo-api.svg?branch=master)](https://travis-ci.org/Oupsla/StacktraceCrawler) [![Coverage Status](https://coveralls.io/repos/github/bnjjj/lost-pet-geo-api/badge.svg)](https://coveralls.io/github/bnjjj/lost-pet-geo-api)
+[![Build Status](https://travis-ci.org/bnjjj/lost-pet-geo-api.svg?branch=master)](https://travis-ci.org/bnjjj/lost-pet-geo-api) [![Coverage Status](https://coveralls.io/repos/github/bnjjj/lost-pet-geo-api/badge.svg)](https://coveralls.io/github/bnjjj/lost-pet-geo-api)
 
 ## Tools Prerequisites
 + Install dependencies :
