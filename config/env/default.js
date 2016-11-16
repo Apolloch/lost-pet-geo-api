@@ -9,7 +9,7 @@ module.exports = {
     basePath: '/api/v1.0'
   },
   mongo: {
-    url: 'mongodb://dev:dev@ds049496.mlab.com:49496/lost-pet-geo-dev'
+    url: 'mongodb://' + process.env.DBUSER + ':' + process.env.DBPASS + '@ds049496.mlab.com:49496/lost-pet-geo-dev'
   },
   redis: {
     host: 'localhost',
