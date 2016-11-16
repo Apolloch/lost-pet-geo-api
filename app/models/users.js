@@ -3,7 +3,7 @@
 var mongoose = require('mongoose');
 var crypto = require('crypto');
 var Schema = mongoose.Schema;
-
+mongoose.Promise = require('bluebird');
 
 var UserSchema = new Schema({
   id: {
