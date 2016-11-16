@@ -36,7 +36,7 @@ module.exports = function(router, Users , Pets) {
 
 
     function getOne(req, res) {
-        res.json(Pets.findAsync({_id: req.params.id}));
+        return res.json(Pets.findAsync({_id: req.params.id}));
     }
 
 };
