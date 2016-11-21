@@ -8,6 +8,7 @@ module.exports = function(router, Users , Pets ,Species,Breeds) {
   router.get('/:id', getOne);
   router.post('/species' , addSpecies)
   router.post('/species/:speciesId/breeds', addBreed);
+  router.post('/', addPet);
 
   function getAll(req, res) {
     return  res.json(Pets.findAsync());
@@ -88,6 +89,64 @@ module.exports = function(router, Users , Pets ,Species,Breeds) {
     }
     else{
       return res.status(400).json({code: 400, message:'missing the \'name\' body parameter'})
+    }
+
+  }
+
+  function addPet(req,res) {
+    var name = req.body.name
+    var photos= req.body.photos
+    var breedId = req.body.breedId
+    var speciesId = req.body.speciesId
+    var color = req.body.color
+    var userId = req.body.userId
+    if(name != null && breedId !=null && speciesId!=null && color !=null && userId != null ) {
+        Users.findOneAsync({_id: userId}).then(function (user) {
+            if (user != null) {
+                Species.findOneAsync({_id: speciesId}).then(function (species) {
+                    if (species != null) {
+                        Breeds.findOneAsync({_id: breedId}).then(function (breed) {
+                            if (breed != null){
+                                var pet = new Pets({
+                                    name: name,
+                                    photos: photos || '',
+                                    breedId: breedId,
+                                    speciesId: speciesId,
+                                    color: color,
+                                    userId: userId
+                                });
+                                pet.saveAsync()
+                                    .spread(function (pet) {
+                                        return res.status(200).json(pet)
+                                    })
+                                    .catch(function (err) {
+                                        return res.status(500).json(err)
+                                    })
+                            }
+                            else{
+                                return res.status(404).json({code: 404, message: 'unable to find breed'});
+                            }
+                        },function (err) {
+                            return res.status(404).json({code: 404, message: 'unable to find breed'});
+                        })
+                    }
+                    else{
+                        return res.status(404).json({code: 404, message: 'unable to find species'});
+                    }
+                },function (err) {
+                    return res.status(404).json({code: 404, message: 'unable to find species'});
+                });
+            }
+            else{
+                return res.status(404).json({code: 404, message: 'unable to find user'});
+            }
+        },function (err) {
+            return res.status(404).json({code: 404, message: 'unable to find user'});
+
+        })
+    }
+    else{
+        return res.status(400).json({code: 400, message:'missing some body parameter .Should have name,color,speciesId,breedId,userId at least'})
     }
 
   }

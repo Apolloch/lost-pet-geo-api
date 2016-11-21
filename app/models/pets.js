@@ -6,10 +6,6 @@ var Schema = mongoose.Schema;
 mongoose.Promise = require('bluebird');
 
 var PetSchema = new Schema({
-    id: {
-        type: Number,
-        unique: true
-    },
     name: {
         type: String,
         default: ''
@@ -31,7 +27,7 @@ var PetSchema = new Schema({
         default : ''
     },
     userId: {
-        type : Number,
+        type : String,
         required : true
     }
 });
