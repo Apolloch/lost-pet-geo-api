@@ -7,6 +7,6 @@ module.exports = {
     basePath: '/api/v1.0'
   },
   mongo: {
-    url: 'mongodb://localhost:27017/node-local'
+    url: 'mongodb://127.0.0.1:27017/node-local'
   }
 };
