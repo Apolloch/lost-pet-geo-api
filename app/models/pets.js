@@ -3,7 +3,7 @@
  */
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-mongoose.Promise = require('bluebird'); 
+mongoose.Promise = require('bluebird');
 
 var PetSchema = new Schema({
     id: {
@@ -18,13 +18,13 @@ var PetSchema = new Schema({
         type : [String],
         default: ''
     },
-    type: {
-        type : String,
-        default: ''
-    },
-    breed: {
+    breedId: {
         type : String ,
-        default : ''
+        required : true
+    },
+    speciesId:{
+        type : String,
+        required : true
     },
     color: {
         type : String ,

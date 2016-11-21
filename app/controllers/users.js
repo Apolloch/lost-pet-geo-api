@@ -12,8 +12,9 @@ module.exports = function(router, Users) {
   }
 
   function getOne(req, res) {
+    //TODO user exclude salt && hashed_password
     return Users.findAsync({_id: req.params.id})
-      .spread(function (user) { return res.json(user); });
+        .spread(function (user) { return res.json(user); });
   }
 
   function getPets(req, res) {
@@ -45,7 +46,7 @@ module.exports = function(router, Users) {
 
   function updateUser(req,res) {
     var id = req.params.id ;
-    Users.findOneAsync({id : id}).then(function (user) {
+    Users.findOneAsync({_id : id}).then(function (user) {
       if (user != null) {
         Users.updateAsync({_id : user._id}, {
           firstName: (req.body.firstName || user.firstName),
