@@ -1,7 +1,7 @@
 var app = require('../../server.js').app;
-var loader = require('../../config/config-loader');
 var mongoose = require('mongoose');
 var User = mongoose.model('Users');
+var UserSchema = require('mongoose').model('Users').schema;
 var _ = require('lodash');
 var Promise = require('bluebird');
 
@@ -16,7 +16,12 @@ describe('Users tests', function() {
 
   describe('Model tests', function() {
 
-    var user = new User();
+    var user = null;
+
+    beforeEach((done) => {
+      user = new User();
+      done();
+    });
 
     it('should encrypt password', function(done) {
       var hashed_password = user.encryptPassword('test');
@@ -42,15 +47,42 @@ describe('Users tests', function() {
       done();
     });
 
-    it('should validate user', function(done) {
-      this.skip();
-      user.validate(user, function (){
-        console.log("ohoho");
-        done();
-      });
+    it('should set a password to a user', function(done) {
+      user.set('password', 'TestPassword');
+      user.password.should.be.exactly('TestPassword');
+      user.salt.should.be.a.String();
+      user.hashed_password.should.be.a.String();
+      done();
     });
 
-  });
+
+    it('should save a user', function(done) {
+      user.set('password', 'TestPassword');
+      user.password.should.be.exactly('TestPassword');
+      user.salt.should.be.a.String();
+      user.hashed_password.should.be.a.String();
+      user.save();
+
+      done();
+    });
+
+    it('should save because the user is not new', function(done) {
+      user.isNew = false;
+      user.save();
+      done();
+    });
+
+    it('should fail when saving user', function(done) {
+      try {
+        user.save();
+        should.fail('no error was thrown when it should have been');
+      }
+      catch (error) {
+       done();
+      }
+    });
+
+  }); // End : Describe model test
 
   describe('Authentication tests', function() {
 

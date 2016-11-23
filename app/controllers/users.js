@@ -5,8 +5,8 @@ module.exports = function(router, Users) {
   router.get('/', getAll);
   router.get('/:id', getOne);
   router.get('/:id/pets', getPets);
-
   router.put('/:id',updateUser);
+
   function getAll(req, res) {
     res.json(Users.findAsync());
   }
@@ -67,4 +67,11 @@ module.exports = function(router, Users) {
       return res.status(404).end('unable to find user');
     });
   }
+
+  return {
+    getPets: getPets,
+    updateUser: updateUser,
+    getOne: getOne,
+    getAll: getAll
+  };
 };
