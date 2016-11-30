@@ -1,6 +1,6 @@
 'use strict';
-
-module.exports = function(router, Users) {
+var Bluebird = require('bluebird');
+module.exports = function(router, Users , Pets) {
 
   router.get('/', getAll);
   router.get('/:id', getOne);
@@ -13,35 +13,28 @@ module.exports = function(router, Users) {
 
   function getOne(req, res) {
     //TODO user exclude salt && hashed_password
-    return Users.findAsync({_id: req.params.id})
+    return Users.findOneAsync({_id: req.params.id})
         .spread(function (user) { return res.json(user); });
   }
 
   function getPets(req, res) {
-    return res.json([
-      {
-        accountId: req.params.id,
-        id: 1,
-        photo: 'http://www.apagi.fr/media/filer_public/37/85/3785774d-1d65-4a7c-8f44-e6175f92a603/jumper-chien-male-yorkshire-noir-et-feu-1.jpg',
-        pet: {
-          type: 'chien',
-          name: 'toutou',
-          race: 'bichon',
-          color: 'blanc',
-        }
-      },
-      {
-        accountId: req.params.id,
-        id: 2,
-        photo: 'http://previews.123rf.com/images/bartkowski/bartkowski1203/bartkowski120300005/12612383-Noir-petit-chaton-assis-un-sur-un-fond-blanc-Banque-d\'images.jpg',
-        pet: {
-          type: 'chat',
-          name: 'chaton',
-          race: '',
-          color: 'noir'
-        }
-      }
-    ]);
+    return Bluebird.props({
+        user: Users.findOneAsync({_id: req.params.id}),
+        pets: Pets.findAsync({userId: req.params.id})
+    })
+        .then(function(resp) {
+            console.log(resp.user);
+            console.log(resp.pets);
+            if (resp.pets != null && resp.user!=null) {
+                return res.status(200).json(resp.pets);
+            }
+            else{
+                return res.status(404).json({code: 404, message: 'unable to find user'});
+            }
+        })
+        .catch(function(err){
+            return res.status(404).json(err);
+        });
   }
 
   function updateUser(req,res) {
