@@ -86,7 +86,6 @@ function getModelName(name) {
 }
 
 function createRoute(app, name) {
-  console.log(name);
   return function (express) {
     var route = express.Router();
     app.use('/' + name, route);

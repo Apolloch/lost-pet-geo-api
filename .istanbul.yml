@@ -1,2 +1,10 @@
 instrumentation:
-    excludes: ['**/config/plugins/**', '**/config/docs/**', '**/config/middlewares/**', '**/config/secret.js', '**/config/mongoose.js', '**/config/express.js']
+    excludes: ['**/config/plugins/**',
+    '**/config/docs/**',
+    '**/config/middlewares/**',
+    '**/config/secret.js',
+    '**/config/mongoose.js',
+    '**/config/express.js',
+    '**/app/controllers/**',
+    '**/app/common/**',
+    '**/server.js**']

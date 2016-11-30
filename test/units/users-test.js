@@ -10,6 +10,9 @@ var should = require('should');
 var chai = require('chai');
 var assert = chai.assert,
   expect = chai.expect;
+var chaiAsPromised = require("chai-as-promised");
+chai.use(chaiAsPromised);
+var httpMocks = require('node-mocks-http');
 
 
 describe('Users tests', function() {
@@ -72,15 +75,11 @@ describe('Users tests', function() {
       done();
     });
 
-    it('should fail when saving user', function(done) {
-      try {
-        user.save();
-        should.fail('no error was thrown when it should have been');
-      }
-      catch (error) {
-       done();
-      }
-    });
+    /*it('should not save because the user dont have password', function(done) {
+      user.save().should.be.rejected;
+      done();
+    });*/
+
 
   }); // End : Describe model test
 
