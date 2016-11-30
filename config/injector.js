@@ -11,7 +11,7 @@ var cloudinary = require('cloudinary');
 var load = function (config) {
   Bluebird.promisifyAll(request);
 
-  cloudinary.config({ 
+  cloudinary.config({
     cloud_name: config.cloudinary.cloudName,
     api_key: config.cloudinary.apiKey,
     api_secret: config.cloudinary.apiSecret
@@ -94,5 +94,6 @@ function createRoute(app, name) {
 }
 
 module.exports = {
-  load: load
+  load: load,
+  createRoute: createRoute
 };

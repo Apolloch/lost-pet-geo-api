@@ -72,7 +72,7 @@ UserSchema
 UserSchema.pre('save', function(next) {
   if (!this.isNew) return next();
 
-  if (!validatePresenceOf(this.password) && !this.skipValidation()) {
+  if (!validatePresenceOf(this.password)) {
     next(new Error('Invalid password'));
   } else {
     next();
